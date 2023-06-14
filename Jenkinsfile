@@ -27,7 +27,9 @@ pipeline {
         stage('validate data in shell') {
             steps {
                 println(params.SECRET_DATA)
-                sh '''
+                sh '''  
+                        echo "${SECRET_DATA}" > secret.json
+                        cat secret.json
                         chmod +x entry.sh
                         echo ${SECRET_DATA}
                         ./entry.sh ${myenv}  ${showtext}  ${SECRET_DATA}
