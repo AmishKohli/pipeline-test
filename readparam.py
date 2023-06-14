@@ -1,4 +1,4 @@
-import sys, getopt
+import sys, getopt, json
 
 def main(argv):
    choice = ''
@@ -18,6 +18,33 @@ def main(argv):
    print ('Input param is ', choice)
    print ('Output param is ', text)
    print ('Output param is ', secret)
+   return secret
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   secretdataviaparam = main(sys.argv[1:])
+   print("returned: " + secretdataviaparam)
+   index = secretdataviaparam.find("\\")
+   if index != -1:
+      print("\\ is found")
+      print(secretdataviaparam[index + 1])
+      if secretdataviaparam[index + 1] != "\\":
+         print("modification required in file")
+
+
+   
+
+   secretfile = "secret.json"
+   #encodedUnicode = json.dumps(unicodeData, ensure_ascii=False).encode('utf-8')
+   secretfileobj = open(secretfile)
+   f = open(secretfile,)
+   print(f.readline())
+   encodedUnicode = json.dumps(secretdataviaparam, ensure_ascii=True).encode('utf-8')
+   print (encodedUnicode)
+   data = json.loads(encodedUnicode)
+   print(type(data))
+   #print(data['TypeSecret'])
+   f.close()
+
+
+
+

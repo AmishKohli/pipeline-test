@@ -50,6 +50,7 @@ pipeline {
                         ls -ltr /var/lib/jenkins/.local/bin
                         export PATH=$PATH:/var/lib/jenkins/.local/bin
                         pip install getopts
+                        
                         python readparam.py -c ${myenv} -t ${showtext}  -s ${SECRET_DATA}
                     '''
                     // println(params.myenv)
