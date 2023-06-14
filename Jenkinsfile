@@ -27,6 +27,7 @@ pipeline {
         stage('validate data in shell') {
             steps {
                 sh '''
+                        chmod +x entry.sh
                         ./entry.sh ${myenv}  ${showtext}  ${SECRET_DATA}
                     '''
             }
