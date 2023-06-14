@@ -40,8 +40,6 @@ pipeline {
                 script {
                     sh '''
                         python --version
-                        is_pip_install=$(pip --version)
-                        echo $is_pip_install
                         curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
                         ls -ltr
                         pwd
