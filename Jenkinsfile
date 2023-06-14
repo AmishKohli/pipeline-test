@@ -23,5 +23,29 @@ pipeline {
                 }
             }
         }
+
+        stage('validate data in shell') {
+            steps {
+                sh '''
+                        ./entry.sh ${myenv}  ${showtext}  ${SECRET_DATA}
+                    '''
+            }
+        }
+
+        stage('validate data in Python') {
+            steps {
+                script {
+                    sh '''
+                        python --version
+                        pip install getopts
+                        python readparam.py -c ${myenv} -t ${showtext}  -s ${SECRET_DATA}
+                    '''
+                    // println(params.myenv)
+                    // println(params.showtext)
+                    // println(params.SECRET_DATA)
+                    
+                }
+            }
+        }
     }
 }
