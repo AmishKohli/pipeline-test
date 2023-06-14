@@ -26,8 +26,10 @@ pipeline {
 
         stage('validate data in shell') {
             steps {
+                println(params.SECRET_DATA)
                 sh '''
                         chmod +x entry.sh
+                        echo ${SECRET_DATA}
                         ./entry.sh ${myenv}  ${showtext}  ${SECRET_DATA}
                     '''
             }
@@ -38,6 +40,13 @@ pipeline {
                 script {
                     sh '''
                         python --version
+                        is_pip_install=$(pip --version)
+                        echo $is_pip_install
+                        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+                        ls -ltr
+                        pwd
+                        whoami
+                        python get-pip.py
                         pip install getopts
                         python readparam.py -c ${myenv} -t ${showtext}  -s ${SECRET_DATA}
                     '''
